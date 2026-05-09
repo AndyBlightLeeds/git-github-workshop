@@ -1,2 +1,3 @@
-# git-github-workshop
-Git and GitHub workshops developed for UK RAS STEPS
+# Git and GitHub Workshop
+
+Git and GitHub workshop repo developed for UK RAS STEPS.
