@@ -1,6 +1,6 @@
 # Sample
 
-This is Anna's version.  She had the original idea.
+This is Fred's version.  He changed this line.
 
 ## Heading 2
 
