@@ -5,15 +5,20 @@
 Two people have been working on a project, Anna and Fred.  Anna starts the project, and sends a copy to Fred to add his section.  Fred now wants to check his changes, so he creates a `diff` of the two files.
 
 ```bash
-# No colour.
-diff -u  anna/sample.md fred/sample.md
-# Colour output.  Note the different parameters.  Both work!
-$ diff --color=auto -u anna fred
+diff -Naur anna fred
 ```
 
 ```diff
---- anna/sample.md      2026-05-09 15:41:48.459090115 +0100
-+++ fred/sample.md      2026-05-09 15:42:54.083991014 +0100
+diff -Naur anna/new-folder/freds-new-file.md fred/new-folder/freds-new-file.md
+--- anna/new-folder/freds-new-file.md   1970-01-01 01:00:00.000000000 +0100
++++ fred/new-folder/freds-new-file.md   2026-05-12 09:47:40.917871972 +0100
+@@ -0,0 +1,3 @@
++# Fred added this file
++
++Hello World!
+diff -Naur anna/sample.md fred/sample.md
+--- anna/sample.md      2026-05-12 09:06:38.277399757 +0100
++++ fred/sample.md      2026-05-12 09:06:38.277399757 +0100
 @@ -1,3 +1,7 @@
  # Sample
 
@@ -24,15 +29,15 @@ $ diff --color=auto -u anna fred
 +Fred added some more text here about something else.
 ```
 
-You can see the lines that have been changed, `-` indicates line removed, `+` indicates line added.  The `-u` stands for "unified" which shows a small amount of context around the change (default 3 lines before and 3 lines after).  Unified diffs are the standard format for `patch`.
+You can see the lines that have been changed, `-` indicates line removed, `+` indicates line added.  The `-Naur` are the `diff` command options that are most like the method Git uses.
 
 ## Example B: Create and apply a patch
 
-Fred wants to send his changes to Anna, but does't want to send a complete copy of all of the whole project.  Instead, he creates a `patch` file and sends that instead.
+Fred wants to send his changes to Anna, but doesn't want to send a complete copy of all of the whole project.  Instead, he creates a `patch` file and sends that instead.
 
 ```bash
 # Create patch file from original -> updated
-$ diff -u anna fred > update.patch
+$ diff -Naur anna fred > update.patch
 ```
 
 Fred sends the patch file to Anna and she applies it to her work.
@@ -47,18 +52,9 @@ cp -r anna anna2
 Applies the patch.
 
 ```bash
-$ patch anna2/sample.md < update.patch
+$ patch -p1 < ../update.patch
 
-# Print contents of the modified file.
-$ cat anna2/sample.md
-```
-
-```md
-# Sample
-
-This is Anna's version.  She had the original idea.
-
-## Heading 2
-
-Fred added some more text here about something else.
+# Print contents of the modified files
+$ cat sample.md
+$ cat new-folder/freds-new-file.md
 ```

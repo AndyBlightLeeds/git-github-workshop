@@ -1,2 +1,6 @@
 **/.vscode
 suggestion*
+**/anna2
+*.orig
+*.rej
+*.patch
