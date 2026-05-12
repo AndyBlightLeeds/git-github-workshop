@@ -66,3 +66,5 @@ ls -R
 cat sample.md
 cat new-folder/freds-new-file.md
 ```
+
+Show this repo in `gitk` to show the `diffs` and branches.
